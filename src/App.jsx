@@ -5,6 +5,8 @@ import {
   CalendarDays,
   Check,
   CheckCircle2,
+  ChevronDown,
+  ChevronUp,
   Circle,
   Clock3,
   Cpu,
@@ -242,6 +244,14 @@ function PublicSite({ onSignIn }) {
   const catalog = site?.catalog || []
   const posts = site?.posts || []
   const categories = [...new Set(catalog.map((item) => item.category || 'Services'))]
+  const [expandedCategories, setExpandedCategories] = useState({})
+
+  const toggleCategory = (category) => {
+    setExpandedCategories((current) => ({
+      ...current,
+      [category]: !current[category]
+    }))
+  }
 
   useEffect(() => {
     trackPageview(page === 'workshop' ? '/workshop' : '/')
@@ -395,9 +405,19 @@ function PublicSite({ onSignIn }) {
         </div>
         {catalog.length ? (
           <div className="catalog-groups">
-            {categories.map((category) => (
+            {categories.map((category) => {
+              const isExpanded = expandedCategories[category]
+              return (
               <div className="catalog-group" key={category}>
-                <h3>{category}</h3>
+                <button
+                  className="catalog-group__toggle"
+                  onClick={() => toggleCategory(category)}
+                  aria-expanded={isExpanded}
+                >
+                  <h3>{category}</h3>
+                  {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                </button>
+                {isExpanded && (
                 <div className="catalog-items">
                   {catalog.filter((item) => (item.category || 'Services') === category).map((item) => (
                     <div className="catalog-item" key={item.id}>
@@ -418,8 +438,10 @@ function PublicSite({ onSignIn }) {
                     </div>
                   ))}
                 </div>
+                )}
               </div>
-            ))}
+              )
+            })}
           </div>
         ) : (
           <p className="catalog-empty">Our full rate list is being published — tell us what you need below and we'll quote it.</p>

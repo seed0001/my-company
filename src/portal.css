@@ -372,7 +372,10 @@ h1, h2, h3, h4, .brand-mark { font-family: 'Manrope', sans-serif; }
 .service-card p { margin-top: 8px; color: var(--muted); font-size: 13px; line-height: 1.6; }
 
 .catalog-groups { display: flex; flex-direction: column; gap: 30px; }
-.catalog-group h3 { margin-bottom: 12px; color: var(--copper-dark); font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+.catalog-group__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0; border: none; background: none; cursor: pointer; color: var(--copper-dark); }
+.catalog-group__toggle:hover { color: var(--copper); }
+.catalog-group__toggle h3 { margin-bottom: 12px; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: inherit; }
+.catalog-group__toggle svg { margin-bottom: 12px; }
 .catalog-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
 .catalog-item { display: grid; padding: 16px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--cream); grid-template-columns: 1fr auto; align-items: baseline; column-gap: 16px; }
 .catalog-item strong { color: var(--ink); font-size: 14px; }
